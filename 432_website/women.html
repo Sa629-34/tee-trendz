@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wear Now - Women T-Shirts</title>
+    <link rel="stylesheet" href="shop.css">
+</head>
+<script src="shop.js" defer></script>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="Wear Now Logo" id="logo">
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="mainpage.html">Home</a></li>
+                <li><a href="men.html">Men</a></li>
+                <li><a href="women.html">Women</a></li>
+                <li><a href="new.html">New Arrivals</a></li>
+                <li><a href="best.html">Best Sellers</a></li>
+                <li>
+                    <input type="text" id="navSearch" placeholder="🔍 Search..." 
+                        oninput="searchProducts()"
+                        style="
+                            padding: 8px 15px;
+                            border-radius: 20px;
+                            border: 2px solid #FF3D00;
+                            background: #f4f4f4;
+                            font-size: 13px;
+                            outline: none;
+                            width: 180px;
+                        ">
+                </li>
+                <li>
+                    <a href="#" onclick="logout()" style="color:#FFD600; font-weight:700;">Logout 🚪</a>
+                </li>
+                <li>
+                    <a href="cart.html">
+                        🛒 <span id="cart-count" style="
+                            background:red;
+                            color:white;
+                            border-radius:50%;
+                            padding:2px 7px;
+                            font-size:12px;
+                            font-weight:700;
+                        ">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Search bar below nav -->
+        <div style="text-align:center; padding:20px 15px; background:#1A1A2E;">
+            <input type="text" id="searchInput" placeholder="🔍 Search t-shirts by color, style..." 
+                oninput="searchProducts()"
+                style="
+                    width: 50%;
+                    padding: 14px 25px;
+                    border-radius: 30px;
+                    border: 3px solid #FF3D00;
+                    font-size: 15px;
+                    outline: none;
+                    background: #f4f4f4;
+                    box-shadow: 0 4px 15px rgba(255,61,0,0.3);
+                ">
+        </div>
+
+        <!-- No results message -->
+        <div id="no-results" style="
+            display:none;
+            text-align:center;
+            padding:40px;
+            font-size:20px;
+            color:#FF3D00;
+            font-weight:700;
+            background:#1A1A2E;
+        ">
+            😕 Koi product nahi mila! Kuch aur search karo.
+        </div>
+
+        <section class="featured-products" id="main">
+
+            <div class="product">
+                <img src="w7.jpg" alt="Black Graphic T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w2.jpg" alt="Neon Print T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w3.jpg" alt="Blue Crop T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w5.jpg" alt="Black Pink Print T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="10.jpg" alt="Black Printed T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="9.jpg" alt="White Casual T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="8.jpg" alt="Pink Oversized T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="7.jpg" alt="Navy Blue T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w6.jpg" alt="Black Pattern T-Shirt">
+                <span>&#8377;499.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w8.jpg" alt="Lavender Casual T-Shirt">
+                <span>&#8377;499.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w11.jpg" alt="White Floral T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w14.jpg" alt="Grey Casual T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w17.jpg" alt="Red Graphic T-Shirt">
+                <span>&#8377;699.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w15.jpg" alt="Yellow Printed T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w16.jpg" alt="Green T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w10.jpg" alt="Beige Oversized T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w9.jpg" alt="Pink Striped T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="w12.jpg" alt="Blue Denim T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="product">
+                <img src="14.jfif" alt="Printed Casual T-Shirt">
+                <span>&#8377;599.00</span>
+                <button onclick="addToCart(this)">Add to Cart</button>
+            </div>
+
+            <div class="pagination">
+                <a href="?page=1" class="active">1</a>
+                <a href="new.html">2</a>
+                <a href="best.html">Next</a>
+            </div>
+
+        </section>
+    </div>
+
+    <footer class="footer-grid">
+        <div class="icon-container">
+            <img src="delivery.png" alt="Delivery Icon">
+            <h3>Fast & Free Delivery</h3>
+            <p1>Shipping within 48 hours across India.</p1>
+        </div>
+        <div class="icon-container">
+            <img src="exchange.png" alt="Exchange Icon">
+            <h3>Easy Exchanges & Returns</h3>
+            <p1>Easy exchange & returns within 10 days.</p1>
+        </div>
+        <div class="icon-container">
+            <img src="contact.png" alt="Contact Us Icon">
+            <h3>Contact Us 24/7</h3>
+            <p1>Write us at support@wearnow.com</p1><br>
+            <p1>Customer-Care No. 1800 2800 3800</p1>
+        </div>
+    </footer>
+
+    <footer>
+        <p>&copy; 2023 Wear Now. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function logout() {
+            localStorage.removeItem("user");
+            alert("Logged out successfully! 👋");
+            window.location.href = "login.html";
+        }
+
+        function searchProducts() {
+            const navInput = document.getElementById("navSearch").value.toLowerCase();
+            const mainInput = document.getElementById("searchInput").value.toLowerCase();
+            const query = navInput || mainInput;
+
+            const products = document.querySelectorAll(".product");
+            let visibleCount = 0;
+
+            products.forEach(product => {
+                const img = product.querySelector("img");
+                const price = product.querySelector("span");
+                const altText = img ? img.alt.toLowerCase() : "";
+                const priceText = price ? price.innerText.toLowerCase() : "";
+
+                if (altText.includes(query) || priceText.includes(query)) {
+                    product.style.display = "flex";
+                    visibleCount++;
+                } else {
+                    product.style.display = "none";
+                }
+            });
+
+            document.getElementById("no-results").style.display =
+                visibleCount === 0 ? "block" : "none";
+        }
+    </script>
+
+</body>
+</html>

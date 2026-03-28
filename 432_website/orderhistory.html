@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - Wear Now</title>
+    <link rel="stylesheet" href="shop.css">
+    <style>
+        .orders-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        .order-card {
+            background: white;
+            border-radius: 12px;
+            border: 2px solid #eee;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        .order-card:hover {
+            border-color: #FF3D00;
+            box-shadow: 0 6px 20px rgba(255,61,0,0.15);
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
+        }
+        .order-date { font-size: 13px; color: #888; }
+        .order-total { font-size: 20px; font-weight: 700; color: #FF3D00; }
+        .order-items {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .order-item-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #eee;
+        }
+        .order-address {
+            font-size: 13px;
+            color: #555;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .order-payment {
+            display: inline-block;
+            margin-top: 8px;
+            background: #1A1A2E;
+            color: #FFD600;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .page-title {
+            text-align: center;
+            padding: 30px;
+            background: #1A1A2E;
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border-bottom: 4px solid #FF3D00;
+        }
+        .empty-orders {
+            text-align: center;
+            padding: 60px;
+            color: #888;
+            font-size: 18px;
+        }
+        .btn-track {
+            background: #1A1A2E;
+            color: #FFD600;
+            border: none;
+            padding: 7px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 8px;
+            transition: all 0.3s;
+        }
+        .btn-track:hover {
+            background: #FF3D00;
+            color: white;
+            transform: scale(1.05);
+        }
+        .btn-cancel {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 7px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-cancel:hover {
+            background: #cc0000;
+            transform: scale(1.05);
+        }
+        .status-confirmed {
+            background: linear-gradient(135deg, #FF3D00, #FFD600);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .status-confirmed:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255,61,0,0.4);
+        }
+        .status-cancelled {
+            background: #ff4444;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* ✅ MODAL CSS */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            border-top: 5px solid #FF3D00;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: popIn 0.3s ease;
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .modal-close {
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        .modal-close:hover {
+            background: #cc0000;
+            transform: scale(1.1);
+        }
+        .modal-row {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .modal-label {
+            font-weight: 700;
+            color: #1A1A2E;
+            min-width: 130px;
+        }
+        .modal-value { color: #555; }
+    </style>
+</head>
+<body>
+
+<div class="page-title">📦 Order History</div>
+
+<nav>
+    <ul style="display:flex; list-style:none; justify-content:center; gap:20px; background:#1A1A2E; padding:12px; margin:0; border-bottom:3px solid #FF3D00;">
+        <li><a href="mainpage.html" style="color:white; text-decoration:none; font-weight:600;">Home</a></li>
+        <li><a href="women.html" style="color:white; text-decoration:none; font-weight:600;">Women</a></li>
+        <li><a href="cart.html" style="color:white; text-decoration:none; font-weight:600;">🛒 Cart</a></li>
+        <li><a href="#" onclick="logout()" style="color:#FF3D00; text-decoration:none; font-weight:700;">Logout 🚪</a></li>
+    </ul>
+</nav>
+
+<div class="orders-container">
+    <div id="orders-list">Loading...</div>
+</div>
+
+<!-- ✅ MODAL POPUP -->
+<div class="modal-overlay" id="orderModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3 style="color:#FF3D00; margin:0;">📋 Order Details</h3>
+            <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div id="modal-content"></div>
+    </div>
+</div>
+
+<script>
+function loadOrders() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+        alert("Please login first!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    fetch(`http://localhost:3000/orders/${user._id}`)
+    .then(res => res.json())
+    .then(orders => {
+        if (orders.length === 0) {
+            document.getElementById("orders-list").innerHTML = `
+                <div class="empty-orders">
+                    😕 Koi order nahi mila!<br><br>
+                    <a href="women.html" style="color:#FF3D00; font-weight:700;">
+                        Shopping karo →
+                    </a>
+                </div>
+            `;
+            return;
+        }
+
+        let html = "";
+        orders.forEach((order, index) => {
+            const date = new Date(order.date).toLocaleDateString('en-IN', {
+                day: 'numeric', month: 'long', year: 'numeric'
+            });
+
+            let itemsHtml = "";
+            order.items.forEach(item => {
+                itemsHtml += `
+                    <img class="order-item-img" src="${item.image}"
+                        title="${item.price} x ${item.quantity}">
+                `;
+            });
+
+            // ✅ Status badge — clickable for confirmed
+            const statusBadge = order.status === "Cancelled"
+                ? `<span class="status-cancelled">❌ Cancelled</span>`
+                : `<span class="status-confirmed"
+                        onclick="showOrderDetails('${order._id}')"
+                        title="Click for details">
+                        ✅ Confirmed
+                   </span>`;
+
+            // Track & Cancel buttons
+            const actionButtons = order.status !== "Cancelled" ? `
+                <div style="margin-top:10px;">
+                    <button class="btn-track" onclick="trackOrder('${order._id}')">
+                        🚚 Track Order
+                    </button>
+                    <button class="btn-cancel" onclick="cancelOrder('${order._id}')">
+                        ❌ Cancel Order
+                    </button>
+                </div>
+            ` : `<div style="margin-top:10px; color:#888; font-size:12px;">Order cancelled hai</div>`;
+
+            html += `
+                <div class="order-card" id="order-${order._id}">
+                    <div class="order-header">
+                        <div>
+                            <div style="font-weight:700; font-size:16px;">
+                                Order #${orders.length - index}
+                            </div>
+                            <div class="order-date">📅 ${date}</div>
+                        </div>
+                        <div class="order-total">${order.total}</div>
+                        <div>
+                            ${statusBadge}
+                            ${actionButtons}
+                        </div>
+                    </div>
+                    <div class="order-items">${itemsHtml}</div>
+                    <div class="order-address">
+                        📦 <b>Delivering to:</b> ${order.address}
+                    </div>
+                    <div class="order-payment">
+                        💳 ${order.payment}
+                    </div>
+                </div>
+            `;
+        });
+
+        document.getElementById("orders-list").innerHTML = html;
+    })
+    .catch(err => {
+        console.error(err);
+        document.getElementById("orders-list").innerHTML =
+            "<p style='text-align:center; color:red;'>Error! Server chalu hai?</p>";
+    });
+}
+
+// ✅ Show Order Details Modal
+function showOrderDetails(orderId) {
+    fetch(`http://localhost:3000/track-order/${orderId}`)
+    .then(res => res.json())
+    .then(order => {
+        const date = new Date(order.date).toLocaleDateString('en-IN', {
+            day: 'numeric', month: 'long', year: 'numeric'
+        });
+
+        let itemsHtml = "";
+        order.items.forEach(item => {
+            itemsHtml += `
+                <img src="${item.image}" style="
+                    width:55px; height:55px;
+                    object-fit:cover;
+                    border-radius:8px;
+                    border:2px solid #eee;
+                    margin:3px;
+                ">
+            `;
+        });
+
+        document.getElementById("modal-content").innerHTML = `
+            <div class="modal-row">
+                <span class="modal-label">📅 Order Date:</span>
+                <span class="modal-value">${date}</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">💰 Total:</span>
+                <span class="modal-value" style="color:#FF3D00; font-weight:700;">
+                    ${order.total}
+                </span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">✅ Status:</span>
+                <span class="modal-value">${order.status}</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">💳 Payment:</span>
+                <span class="modal-value">${order.payment}</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">🏠 Address:</span>
+                <span class="modal-value">${order.address}</span>
+            </div>
+            <div class="modal-row">
+                <span class="modal-label">⏱️ Delivery:</span>
+                <span class="modal-value">2-3 business days</span>
+            </div>
+            <div style="margin-top:15px;">
+                <span class="modal-label">🛍️ Items:</span>
+                <div style="margin-top:8px;">${itemsHtml}</div>
+            </div>
+        `;
+
+        document.getElementById("orderModal").classList.add("active");
+    })
+    .catch(err => console.error(err));
+}
+
+// Close modal
+function closeModal() {
+    document.getElementById("orderModal").classList.remove("active");
+}
+
+// Click outside — close
+document.getElementById("orderModal").addEventListener("click", function(e) {
+    if (e.target === this) closeModal();
+});
+
+// ✅ Track Order
+function trackOrder(orderId) {
+    fetch(`http://localhost:3000/track-order/${orderId}`)
+    .then(res => res.json())
+    .then(order => {
+        const date = new Date(order.date).toLocaleDateString('en-IN', {
+            day: 'numeric', month: 'long', year: 'numeric'
+        });
+        alert(
+            `🚚 Order Tracking\n\n` +
+            `📅 Order Date: ${date}\n` +
+            `💰 Total: ${order.total}\n` +
+            `📦 Status: ${order.status}\n` +
+            `🏠 Address: ${order.address}\n\n` +
+            `⏱️ Expected Delivery: 2-3 business days`
+        );
+    })
+    .catch(err => console.error(err));
+}
+
+// ✅ Cancel Order
+function cancelOrder(orderId) {
+    if (!confirm("Kya aap sure hain order cancel karna chahte hain? ❌")) return;
+
+    fetch(`http://localhost:3000/cancel-order/${orderId}`, {
+        method: "DELETE"
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("Order Cancelled! ❌");
+        loadOrders();
+    })
+    .catch(err => console.error(err));
+}
+
+function logout() {
+    localStorage.removeItem("user");
+    window.location.href = "login.html";
+}
+
+loadOrders();
+</script>
+
+</body>
+</html>
