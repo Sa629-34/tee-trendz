@@ -102,7 +102,7 @@ wear-now-ecommerce/
 
 
 
-## 🔗 API Endpoints
+ 🔗 API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -117,15 +117,15 @@ wear-now-ecommerce/
 | GET | /track-order/:id | Track a specific order |
 | DELETE | /cancel-order/:id | Cancel an order |
 
----
 
-## ⚙️ Installation & Setup
 
-### Prerequisites
+ ⚙️ Installation & Setup
+
+ Prerequisites
 - Node.js installed
 - MongoDB Atlas account
 
-### Steps
+ Steps
 
 **1. Clone the repository**
 ```bash
