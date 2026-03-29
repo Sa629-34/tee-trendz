@@ -160,7 +160,8 @@ Or use Live Server extension in VS Code
 
 > Add screenshots of your website here
 
----
+<img width="1319" height="629" alt="image" src="https://github.com/user-attachments/assets/afb9e991-6c0b-4003-bda1-f4adce76e9a3" />
+
 
 ## 👩‍💻 Developer
 
@@ -172,8 +173,6 @@ Or use Live Server extension in VS Code
 
 ## 📄 License
 MIT License — Free to use
-```
 
----
 
 
