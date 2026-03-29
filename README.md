@@ -1,140 +1,148 @@
- 👕 Tee-Trendz
+# 👕 TEE-TRENDZ
 
 A full-stack e-commerce web application for buying t-shirts online, built with Node.js, Express, MongoDB, and Vanilla JavaScript.
 
 
- 🚀 Live Demo
+
+## 🚀 Live Demo
 > Run locally using instructions below
 
+---
 
- ✨ Features
+## ✨ Features
 
 - 🔐 User Authentication — Register & Login with bcrypt password hashing
-- 🛒 Add to Cart — Products easily add ho jaate hain
-- 🔢 Cart Count — Navbar mein live item count
-- ➕➖ Quantity Control — Cart mein +/- buttons
-- 💳 Checkout Page — Delivery address + Payment method selection
-- 📦 Order History — Purane orders track karo
-- 🚚 Track Order — Order details modal popup
-- ❌ Cancel Order — Order cancel kar sakte hain
-- 🔍 Search Bar — Products ko color/style se search karo
-- 🎨 Bold & Colorful UI — Professional design with animations
-- 🔴 Logout — Secure session management
+- 🛒 Add to Cart — Easily add products to cart
+- 🔢 Cart Count — Live item count in navbar
+- ➕➖ Quantity Control — Increase or decrease quantity in cart
+- 💳 Checkout Page — Delivery address and payment method selection
+- 📦 Order History — View all previous orders
+- 🚚 Track Order — View order details in a modal popup
+- ❌ Cancel Order — Cancel any confirmed order
+- 🔍 Search Bar — Search products by color or style
+- 🎨 Bold & Colorful UI — Professional design with smooth animations
+- 🔴 Logout — Secure session management with localStorage
 
 ---
- 🛠️ Tech Stack
 
- Frontend
+## 🛠️ Tech Stack
+
+### Frontend
 | Technology | Usage |
 |------------|-------|
 | HTML5 | Page Structure |
 | CSS3 | Styling, Animations, Grid Layout |
-| JavaScript | Logic, DOM Manipulation |
-| Fetch API | Backend se communicate karna |
-| localStorage | User session save karna |
+| JavaScript | Logic and DOM Manipulation |
+| Fetch API | Communicate with Backend |
+| localStorage | Save User Session |
 
- Backend
+### Backend
 | Technology | Usage |
 |------------|-------|
-| Node.js | Server Runtime |
+| Node.js | Server Runtime Environment |
 | Express.js | REST API Framework |
 | MongoDB Atlas | Cloud Database |
-| Mongoose | MongoDB ODM |
-| bcrypt | Password Hashing & Security |
+| Mongoose | MongoDB Object Data Modeling |
+| bcrypt | Password Hashing and Security |
 | CORS | Cross Origin Resource Sharing |
 
 ---
 
-📁 Project Structure
+## 📁 Project Structure
+```
 wear-now-ecommerce/
-├── 432_website/            Frontend Files
-│   ├── mainpage.html       Home Page
-│   ├── women.html          Women Products Page
-│   ├── men.html            Men Products Page
-│   ├── cart.html           Shopping Cart
-│   ├── checkout.html       Checkout Page
-│   ├── orderhistory.html   Order History Page
-│   ├── login.html          Login Page
-│   ├── regeiter.html       Register Page
-│   ├── shop.css            Main Stylesheet
-│   ├── shop.js             Cart & Search Logic
-│   └── main.css            Home Page Styles
+├── 432_website/           # Frontend Files
+│   ├── mainpage.html      # Home Page
+│   ├── women.html         # Women Products Page
+│   ├── men.html           # Men Products Page
+│   ├── cart.html          # Shopping Cart Page
+│   ├── checkout.html      # Checkout Page
+│   ├── orderhistory.html  # Order History Page
+│   ├── login.html         # Login Page
+│   ├── regeiter.html      # Register Page
+│   ├── shop.css           # Main Stylesheet
+│   ├── shop.js            # Cart and Search Logic
+│   └── main.css           # Home Page Styles
 │
-└── backend/                Backend Files
-    └── server.js           Express Server & API Routes
-
-
- 🔗 API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | /register | User Registration |
-| POST | /login | User Login |
-| GET | /cart/:userId | Cart Items fetch karo |
-| POST | /add-to-cart | Item cart mein add karo |
-| PUT | /update-quantity/:id | Item quantity update karo |
-| DELETE | /remove/:id | Item cart se remove karo |
-| POST | /save-order | Order place karo |
-| GET | /orders/:userId | Order history fetch karo |
-| GET | /track-order/:id | Order track karo |
-| DELETE | /cancel-order/:id | Order cancel karo |
+└── backend/               # Backend Files
+    └── server.js          # Express Server and API Routes
+```
 
 ---
 
- ⚙️ Installation & Setup
+## 🔗 API Endpoints
 
- Prerequisites
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | /register | Register a new user |
+| POST | /login | Login existing user |
+| GET | /cart/:userId | Get all cart items |
+| POST | /add-to-cart | Add item to cart |
+| PUT | /update-quantity/:id | Update item quantity |
+| DELETE | /remove/:id | Remove item from cart |
+| POST | /save-order | Place a new order |
+| GET | /orders/:userId | Get order history |
+| GET | /track-order/:id | Track a specific order |
+| DELETE | /cancel-order/:id | Cancel an order |
+
+---
+
+## ⚙️ Installation & Setup
+
+### Prerequisites
 - Node.js installed
 - MongoDB Atlas account
 
-Steps
+### Steps
 
-1. Clone the repository
-bash
-git clone https://github.com/tumhara-username/wear-now-ecommerce.git
+**1. Clone the repository**
+```bash
+git clone https://github.com/your-username/wear-now-ecommerce.git
 cd wear-now-ecommerce
 ```
 
-2. Install dependencies
-bash
+**2. Install dependencies**
+```bash
 cd backend
 npm install
+```
 
-
-3. Start the server
-bash
+**3. Start the server**
+```bash
 node server.js
+```
 
+**4. Open the website**
+```
+Open 432_website/mainpage.html in your browser
+Or use Live Server extension in VS Code
+```
 
-4. Open the website
+---
 
-Open 432_website/mainpage.html in browser
-Ya VS Code mein Live Server use karo
+## 🗄️ Database Schema
 
-
- 🗄️ Database Schema
-
- User
-json
+### User
+```json
 {
   "name": "String",
   "email": "String",
   "password": "String (bcrypt hashed)"
 }
+```
 
-
-Cart
-json
+### Cart
+```json
 {
   "userId": "String",
   "image": "String",
   "price": "String",
   "quantity": "Number"
 }
+```
 
-
- Order
-json
+### Order
+```json
 {
   "userId": "String",
   "items": "Array",
@@ -144,11 +152,17 @@ json
   "status": "String (default: Confirmed)",
   "date": "Date"
 }
+```
 
+---
 
+## 📸 Screenshots
 
+> Add screenshots of your website here
 
-👩‍💻 Developer
+---
+
+## 👩‍💻 Developer
 
 **Sakshi Bang**
 - 🎓 WebX 2026 Project
@@ -158,4 +172,15 @@ json
 
 ## 📄 License
 MIT License — Free to use
+```
 
+---
+
+**Steps:**
+```
+1. README.md file banao 432_website folder mein
+2. Upar ka content paste karo
+3. Save karo
+4. git add .
+5. git commit -m "Added README"
+6. git push
