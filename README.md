@@ -176,11 +176,4 @@ MIT License — Free to use
 
 ---
 
-**Steps:**
-```
-1. README.md file banao 432_website folder mein
-2. Upar ka content paste karo
-3. Save karo
-4. git add .
-5. git commit -m "Added README"
-6. git push
+
