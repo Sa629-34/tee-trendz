@@ -7,7 +7,28 @@ A full-stack e-commerce web application for buying t-shirts online, built with N
 ## 🚀 Live Demo
 > Run locally using instructions below
 
----
+## 📖 About The Project
+
+Wear Now is a full-stack e-commerce web application designed for 
+online t-shirt shopping. This project was built as part of WebX 2026 
+to demonstrate full-stack web development skills using the MERN-like 
+stack (MongoDB, Express, Node.js) with Vanilla JavaScript on the frontend.
+
+The application provides a complete online shopping experience — from 
+browsing products to placing orders. Users can register and login 
+securely, add products to their cart, manage quantities, checkout with 
+delivery details, and track their order history.
+
+The UI is designed with a bold and colorful theme, featuring smooth 
+animations and hover effects to deliver a modern and engaging user 
+experience.
+
+### 🎯 Why This Project?
+- To learn and implement full-stack web development
+- To understand REST API design and database management
+- To build a real-world application with user authentication
+- To practice frontend development with JavaScript and CSS
+- To gain hands-on experience with MongoDB Atlas cloud database
 
 ## ✨ Features
 
