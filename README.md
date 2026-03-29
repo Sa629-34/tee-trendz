@@ -159,8 +159,20 @@ Or use Live Server extension in VS Code
 ## 📸 Screenshots
 
 > Add screenshots of your website here
+<img width="1323" height="631" alt="image" src="https://github.com/user-attachments/assets/792715b2-f577-4311-8245-3dee2084ce12" />
 
 <img width="1319" height="629" alt="image" src="https://github.com/user-attachments/assets/afb9e991-6c0b-4003-bda1-f4adce76e9a3" />
+
+<img width="1317" height="628" alt="image" src="https://github.com/user-attachments/assets/3e8710a3-bf15-4b82-9efa-ee34fda15ee7" />
+
+<img width="1314" height="590" alt="image" src="https://github.com/user-attachments/assets/93948993-1cb9-42db-85dd-c9118de61c16" />
+
+<img width="830" height="608" alt="image" src="https://github.com/user-attachments/assets/9857f7fb-7f00-4278-9042-c1d552818550" />
+
+<img width="747" height="632" alt="image" src="https://github.com/user-attachments/assets/b54e0e85-3a50-43a2-b306-0190a5c3ffc8" />
+
+<img width="805" height="568" alt="image" src="https://github.com/user-attachments/assets/1bf27e54-d761-4240-b29e-10cd65f7ce83" />
+
 
 
 ## 👩‍💻 Developer
