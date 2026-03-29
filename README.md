@@ -207,10 +207,4 @@ Or use Live Server extension in VS Code
 - 🎓 WebX 2026 Project
 - 💻 Full Stack Developer
 
----
 
-## 📄 License
-
-Copyright © 2026 Sakshi Bang. All rights reserved.
-This project is not open source. No part of this code may be copied,
-modified, or distributed without permission from the author.
