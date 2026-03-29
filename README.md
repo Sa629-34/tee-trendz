@@ -1,11 +1,9 @@
-# 👕 TEE-TRENDZ
+# 👕 Wear Now — MERN Stack Shopping App
 
 A full-stack e-commerce web application for buying t-shirts online, built with Node.js, Express, MongoDB, and Vanilla JavaScript.
 
+---
 
-
-## 🚀 Live Demo
-> Run locally using instructions below
 ## 📚 Table of Contents
 
 - [About The Project](#-about-the-project)
@@ -19,21 +17,15 @@ A full-stack e-commerce web application for buying t-shirts online, built with N
 - [Developer](#-developer)
 - [License](#-license)
 
+---
+
 ## 📖 About The Project
 
-Wear Now is a full-stack e-commerce web application designed for 
-online t-shirt shopping. This project was built as part of WebX 2026 
-to demonstrate full-stack web development skills using the MERN-like 
-stack (MongoDB, Express, Node.js) with Vanilla JavaScript on the frontend.
+Wear Now is a full-stack e-commerce web application designed for online t-shirt shopping. This project was built as part of WebX 2026 to demonstrate full-stack web development skills using the MERN-like stack (MongoDB, Express, Node.js) with Vanilla JavaScript on the frontend.
 
-The application provides a complete online shopping experience — from 
-browsing products to placing orders. Users can register and login 
-securely, add products to their cart, manage quantities, checkout with 
-delivery details, and track their order history.
+The application provides a complete online shopping experience — from browsing products to placing orders. Users can register and login securely, add products to their cart, manage quantities, checkout with delivery details, and track their order history.
 
-The UI is designed with a bold and colorful theme, featuring smooth 
-animations and hover effects to deliver a modern and engaging user 
-experience.
+The UI is designed with a bold and colorful theme, featuring smooth animations and hover effects to deliver a modern and engaging user experience.
 
 ### 🎯 Why This Project?
 - To learn and implement full-stack web development
@@ -41,6 +33,8 @@ experience.
 - To build a real-world application with user authentication
 - To practice frontend development with JavaScript and CSS
 - To gain hands-on experience with MongoDB Atlas cloud database
+
+---
 
 ## ✨ Features
 
@@ -84,25 +78,26 @@ experience.
 ## 📁 Project Structure
 ```
 wear-now-ecommerce/
-├── 432_website/            Frontend Files
-│   ├── mainpage.html       Home Page
-│   ├── women.html          Women Products Page
-│   ├── men.html            Men Products Page
-│   ├── cart.html           Shopping Cart Page
-│   ├── checkout.html       Checkout Page
-│   ├── orderhistory.html   Order History Page
-│   ├── login.html          Login Page
-│   ├── regeiter.html       Register Page
-│   ├── shop.css            Main Stylesheet
-│   ├── shop.js             Cart and Search Logic
-│   └── main.css            Home Page Styles
+├── 432_website/           # Frontend Files
+│   ├── mainpage.html      # Home Page
+│   ├── women.html         # Women Products Page
+│   ├── men.html           # Men Products Page
+│   ├── cart.html          # Shopping Cart Page
+│   ├── checkout.html      # Checkout Page
+│   ├── orderhistory.html  # Order History Page
+│   ├── login.html         # Login Page
+│   ├── regeiter.html      # Register Page
+│   ├── shop.css           # Main Stylesheet
+│   ├── shop.js            # Cart and Search Logic
+│   └── main.css           # Home Page Styles
 │
-└── backend/                Backend Files
-    └── server.js           Express Server and API Routes
+└── backend/               # Backend Files
+    └── server.js          # Express Server and API Routes
+```
 
+---
 
-
- 🔗 API Endpoints
+## 🔗 API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -117,45 +112,45 @@ wear-now-ecommerce/
 | GET | /track-order/:id | Track a specific order |
 | DELETE | /cancel-order/:id | Cancel an order |
 
+---
 
+## ⚙️ Installation & Setup
 
- ⚙️ Installation & Setup
-
- Prerequisites
+### Prerequisites
 - Node.js installed
 - MongoDB Atlas account
 
- Steps
+### Steps
 
-1. Clone the repository
-bash
+**1. Clone the repository**
+```bash
 git clone https://github.com/your-username/wear-now-ecommerce.git
 cd wear-now-ecommerce
+```
 
-
-2. Install dependencies
-bash
+**2. Install dependencies**
+```bash
 cd backend
 npm install
+```
 
-
-3. Start the server
- bash
+**3. Start the server**
+```bash
 node server.js
+```
 
-
-4. Open the website
-
+**4. Open the website**
+```
 Open 432_website/mainpage.html in your browser
 Or use Live Server extension in VS Code
+```
 
+---
 
+## 🗄️ Database Schema
 
-
- 🗄️ Database Schema
-
- User
-json
+### User
+```json
 {
   "name": "String",
   "email": "String",
@@ -191,20 +186,13 @@ json
 ## 📸 Screenshots
 
 > Add screenshots of your website here
-<img width="1323" height="631" alt="image" src="https://github.com/user-attachments/assets/792715b2-f577-4311-8245-3dee2084ce12" />
-
-<img width="1319" height="629" alt="image" src="https://github.com/user-attachments/assets/afb9e991-6c0b-4003-bda1-f4adce76e9a3" />
-
-<img width="1317" height="628" alt="image" src="https://github.com/user-attachments/assets/3e8710a3-bf15-4b82-9efa-ee34fda15ee7" />
-
-<img width="1314" height="590" alt="image" src="https://github.com/user-attachments/assets/93948993-1cb9-42db-85dd-c9118de61c16" />
-
-<img width="830" height="608" alt="image" src="https://github.com/user-attachments/assets/9857f7fb-7f00-4278-9042-c1d552818550" />
-
-<img width="747" height="632" alt="image" src="https://github.com/user-attachments/assets/b54e0e85-3a50-43a2-b306-0190a5c3ffc8" />
-
-<img width="805" height="568" alt="image" src="https://github.com/user-attachments/assets/1bf27e54-d761-4240-b29e-10cd65f7ce83" />
-
+<img width="1301" height="631" alt="image" src="https://github.com/user-attachments/assets/859abfff-4a9c-4b32-ae50-1878aa438283" />
+<img width="1284" height="612" alt="image" src="https://github.com/user-attachments/assets/eb335936-f3da-452b-865e-e4f80a342d0b" />
+<img width="1311" height="547" alt="image" src="https://github.com/user-attachments/assets/9a9c719f-45ed-4c58-bf3e-6bfdeaf90962" />
+<img width="1225" height="455" alt="image" src="https://github.com/user-attachments/assets/f3a9f87c-a136-4392-adf2-474e3edf963a" />
+<img width="1040" height="610" alt="image" src="https://github.com/user-attachments/assets/01618bd1-1877-4bf7-b795-0db86dd35f08" />
+<img width="933" height="629" alt="image" src="https://github.com/user-attachments/assets/232ad0f6-a83a-4a99-a74c-c24b2addbbcb" />
+<img width="745" height="629" alt="image" src="https://github.com/user-attachments/assets/7ab3359b-0f49-4fb4-b950-b2a46d266142" />
 
 
 ## 👩‍💻 Developer
@@ -216,7 +204,7 @@ json
 ---
 
 ## 📄 License
-MIT License — Free to use
 
-
-
+Copyright © 2026 Sakshi Bang. All rights reserved.
+This project is not open source. No part of this code may be copied,
+modified, or distributed without permission from the author.
