@@ -127,35 +127,35 @@ wear-now-ecommerce/
 
  Steps
 
-**1. Clone the repository**
-```bash
+1. Clone the repository
+bash
 git clone https://github.com/your-username/wear-now-ecommerce.git
 cd wear-now-ecommerce
-```
 
-**2. Install dependencies**
-```bash
+
+2. Install dependencies
+bash
 cd backend
 npm install
-```
 
-**3. Start the server**
-```bash
+
+3. Start the server
+ bash
 node server.js
-```
 
-**4. Open the website**
-```
+
+4. Open the website
+
 Open 432_website/mainpage.html in your browser
 Or use Live Server extension in VS Code
-```
 
----
 
-## 🗄️ Database Schema
 
-### User
-```json
+
+ 🗄️ Database Schema
+
+ User
+json
 {
   "name": "String",
   "email": "String",
