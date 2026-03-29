@@ -187,11 +187,17 @@ Or use Live Server extension in VS Code
 
 > Add screenshots of your website here
 <img width="1301" height="631" alt="image" src="https://github.com/user-attachments/assets/859abfff-4a9c-4b32-ae50-1878aa438283" />
+
 <img width="1284" height="612" alt="image" src="https://github.com/user-attachments/assets/eb335936-f3da-452b-865e-e4f80a342d0b" />
+
 <img width="1311" height="547" alt="image" src="https://github.com/user-attachments/assets/9a9c719f-45ed-4c58-bf3e-6bfdeaf90962" />
+
 <img width="1225" height="455" alt="image" src="https://github.com/user-attachments/assets/f3a9f87c-a136-4392-adf2-474e3edf963a" />
+
 <img width="1040" height="610" alt="image" src="https://github.com/user-attachments/assets/01618bd1-1877-4bf7-b795-0db86dd35f08" />
+
 <img width="933" height="629" alt="image" src="https://github.com/user-attachments/assets/232ad0f6-a83a-4a99-a74c-c24b2addbbcb" />
+
 <img width="745" height="629" alt="image" src="https://github.com/user-attachments/assets/7ab3359b-0f49-4fb4-b950-b2a46d266142" />
 
 
