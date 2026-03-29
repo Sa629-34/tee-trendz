@@ -6,6 +6,18 @@ A full-stack e-commerce web application for buying t-shirts online, built with N
 
 ## 🚀 Live Demo
 > Run locally using instructions below
+## 📚 Table of Contents
+
+- [About The Project](#-about-the-project)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [API Endpoints](#-api-endpoints)
+- [Installation & Setup](#-installation--setup)
+- [Database Schema](#-database-schema)
+- [Screenshots](#-screenshots)
+- [Developer](#-developer)
+- [License](#-license)
 
 ## 📖 About The Project
 
@@ -72,24 +84,23 @@ experience.
 ## 📁 Project Structure
 ```
 wear-now-ecommerce/
-├── 432_website/           # Frontend Files
-│   ├── mainpage.html      # Home Page
-│   ├── women.html         # Women Products Page
-│   ├── men.html           # Men Products Page
-│   ├── cart.html          # Shopping Cart Page
-│   ├── checkout.html      # Checkout Page
-│   ├── orderhistory.html  # Order History Page
-│   ├── login.html         # Login Page
-│   ├── regeiter.html      # Register Page
-│   ├── shop.css           # Main Stylesheet
-│   ├── shop.js            # Cart and Search Logic
-│   └── main.css           # Home Page Styles
+├── 432_website/            Frontend Files
+│   ├── mainpage.html       Home Page
+│   ├── women.html          Women Products Page
+│   ├── men.html            Men Products Page
+│   ├── cart.html           Shopping Cart Page
+│   ├── checkout.html       Checkout Page
+│   ├── orderhistory.html   Order History Page
+│   ├── login.html          Login Page
+│   ├── regeiter.html       Register Page
+│   ├── shop.css            Main Stylesheet
+│   ├── shop.js             Cart and Search Logic
+│   └── main.css            Home Page Styles
 │
-└── backend/               # Backend Files
-    └── server.js          # Express Server and API Routes
-```
+└── backend/                Backend Files
+    └── server.js           Express Server and API Routes
 
----
+
 
 ## 🔗 API Endpoints
 
