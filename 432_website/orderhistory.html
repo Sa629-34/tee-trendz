@@ -63,6 +63,13 @@
             border-radius: 15px;
             font-size: 12px;
             font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .order-payment:hover {
+            background: #FF3D00;
+            color: white;
+            transform: scale(1.05);
         }
         .page-title {
             text-align: center;
@@ -134,8 +141,6 @@
             font-size: 13px;
             font-weight: 600;
         }
-
-        /* ✅ MODAL CSS */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -146,9 +151,7 @@
             justify-content: center;
             align-items: center;
         }
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
         .modal-box {
             background: white;
             border-radius: 15px;
@@ -199,6 +202,55 @@
             min-width: 130px;
         }
         .modal-value { color: #555; }
+
+        /* ✅ Payment Modal */
+        .payment-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .payment-modal-overlay.active { display: flex; }
+        .payment-modal-box {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            border-top: 5px solid #FFD600;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: popIn 0.3s ease;
+            text-align: center;
+        }
+        .payment-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        .payment-method-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1A1A2E;
+            margin-bottom: 15px;
+        }
+        .payment-detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        .payment-detail-label {
+            font-weight: 700;
+            color: #555;
+        }
+        .payment-detail-value {
+            color: #FF3D00;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
@@ -218,7 +270,7 @@
     <div id="orders-list">Loading...</div>
 </div>
 
-<!-- ✅ MODAL POPUP -->
+<!-- Order Details Modal -->
 <div class="modal-overlay" id="orderModal">
     <div class="modal-box">
         <div class="modal-header">
@@ -226,6 +278,26 @@
             <button class="modal-close" onclick="closeModal()">✕</button>
         </div>
         <div id="modal-content"></div>
+    </div>
+</div>
+
+<!-- ✅ Payment Details Modal -->
+<div class="payment-modal-overlay" id="paymentModal">
+    <div class="payment-modal-box">
+        <div class="payment-icon" id="payment-icon"></div>
+        <div class="payment-method-title" id="payment-title"></div>
+        <div id="payment-details"></div>
+        <button onclick="closePaymentModal()" style="
+            margin-top: 20px;
+            padding: 10px 30px;
+            background: linear-gradient(135deg, #FF3D00, #FFD600);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+        ">Close ✕</button>
     </div>
 </div>
 
@@ -244,9 +316,9 @@ function loadOrders() {
         if (orders.length === 0) {
             document.getElementById("orders-list").innerHTML = `
                 <div class="empty-orders">
-                    😕 Koi order nahi mila!<br><br>
+                    😕 No orders found!<br><br>
                     <a href="women.html" style="color:#FF3D00; font-weight:700;">
-                        Shopping karo →
+                        Shop Now →
                     </a>
                 </div>
             `;
@@ -267,7 +339,6 @@ function loadOrders() {
                 `;
             });
 
-            // ✅ Status badge — clickable for confirmed
             const statusBadge = order.status === "Cancelled"
                 ? `<span class="status-cancelled">❌ Cancelled</span>`
                 : `<span class="status-confirmed"
@@ -276,7 +347,6 @@ function loadOrders() {
                         ✅ Confirmed
                    </span>`;
 
-            // Track & Cancel buttons
             const actionButtons = order.status !== "Cancelled" ? `
                 <div style="margin-top:10px;">
                     <button class="btn-track" onclick="trackOrder('${order._id}')">
@@ -286,7 +356,7 @@ function loadOrders() {
                         ❌ Cancel Order
                     </button>
                 </div>
-            ` : `<div style="margin-top:10px; color:#888; font-size:12px;">Order cancelled hai</div>`;
+            ` : `<div style="margin-top:10px; color:#888; font-size:12px;">Order cancelled</div>`;
 
             html += `
                 <div class="order-card" id="order-${order._id}">
@@ -307,7 +377,9 @@ function loadOrders() {
                     <div class="order-address">
                         📦 <b>Delivering to:</b> ${order.address}
                     </div>
-                    <div class="order-payment">
+                    <!-- ✅ Payment badge clickable -->
+                    <div class="order-payment"
+                        onclick="showPaymentDetails('${order.payment}', '${order.total}')">
                         💳 ${order.payment}
                     </div>
                 </div>
@@ -323,7 +395,84 @@ function loadOrders() {
     });
 }
 
-// ✅ Show Order Details Modal
+// ✅ Payment Details Modal
+function showPaymentDetails(payment, total) {
+    let icon = "";
+    let title = "";
+    let details = "";
+
+    if (payment === "COD") {
+        icon = "💵";
+        title = "Cash on Delivery";
+        details = `
+            <div class="payment-detail-row">
+                <span class="payment-detail-label">Amount to Pay</span>
+                <span class="payment-detail-value">${total}</span>
+            </div>
+            <div class="payment-detail-row">
+                <span class="payment-detail-label">When to Pay</span>
+                <span class="payment-detail-value">At Delivery</span>
+            </div>
+            <div class="payment-detail-row">
+                <span class="payment-detail-label">Advance Payment</span>
+                <span class="payment-detail-value">Not Required ✅</span>
+            </div>
+            <div class="payment-detail-row">
+                <span class="payment-detail-label">Accepted</span>
+                <span class="payment-detail-value">Cash Only</span>
+            </div>
+        `;
+    } else if (payment === "UPI") {
+        icon = "📱";
+        title = "UPI Payment";
+        details = `
+            <div class="payment-detail-row">
+                <span class="payment-detail-label">Amount Paid</span>
+                <span class="payment-detail-value">${total}</span>
+            </div>
+            <div class="payment-detail-row">
+                <span class="payment-detail-label">Payment Status</span>
+                <span class="payment-detail-value">Completed ✅</span>
+            </div>
+            <div class="payment-detail-row">
+                <span class="payment-detail-label">Method</span>
+                <span class="payment-detail-value">GPay / PhonePe / Paytm</span>
+            </div>
+        `;
+    } else if (payment === "CARD") {
+        icon = "💳";
+        title = "Card Payment";
+        details = `
+            <div class="payment-detail-row">
+                <span class="payment-detail-label">Amount Paid</span>
+                <span class="payment-detail-value">${total}</span>
+            </div>
+            <div class="payment-detail-row">
+                <span class="payment-detail-label">Payment Status</span>
+                <span class="payment-detail-value">Completed ✅</span>
+            </div>
+            <div class="payment-detail-row">
+                <span class="payment-detail-label">Method</span>
+                <span class="payment-detail-value">Credit / Debit Card</span>
+            </div>
+        `;
+    }
+
+    document.getElementById("payment-icon").innerText = icon;
+    document.getElementById("payment-title").innerText = title;
+    document.getElementById("payment-details").innerHTML = details;
+    document.getElementById("paymentModal").classList.add("active");
+}
+
+function closePaymentModal() {
+    document.getElementById("paymentModal").classList.remove("active");
+}
+
+document.getElementById("paymentModal").addEventListener("click", function(e) {
+    if (e.target === this) closePaymentModal();
+});
+
+// Order Details Modal
 function showOrderDetails(orderId) {
     fetch(`http://localhost:3000/track-order/${orderId}`)
     .then(res => res.json())
@@ -340,8 +489,7 @@ function showOrderDetails(orderId) {
                     object-fit:cover;
                     border-radius:8px;
                     border:2px solid #eee;
-                    margin:3px;
-                ">
+                    margin:3px;">
             `;
         });
 
@@ -383,17 +531,14 @@ function showOrderDetails(orderId) {
     .catch(err => console.error(err));
 }
 
-// Close modal
 function closeModal() {
     document.getElementById("orderModal").classList.remove("active");
 }
 
-// Click outside — close
 document.getElementById("orderModal").addEventListener("click", function(e) {
     if (e.target === this) closeModal();
 });
 
-// ✅ Track Order
 function trackOrder(orderId) {
     fetch(`http://localhost:3000/track-order/${orderId}`)
     .then(res => res.json())
@@ -413,9 +558,8 @@ function trackOrder(orderId) {
     .catch(err => console.error(err));
 }
 
-// ✅ Cancel Order
 function cancelOrder(orderId) {
-    if (!confirm("Kya aap sure hain order cancel karna chahte hain? ❌")) return;
+    if (!confirm("Are you sure you want to cancel this order? ❌")) return;
 
     fetch(`http://localhost:3000/cancel-order/${orderId}`, {
         method: "DELETE"
