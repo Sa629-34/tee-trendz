@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="profileApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Wear Now</title>
+    <link rel="stylesheet" href="shop.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="toast.js"></script>
+    <style>
+        .profile-container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-top: 5px solid #FF3D00;
+            text-align: center;
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #FF3D00, #FFD600);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 8px 25px rgba(255,61,0,0.3);
+        }
+        .profile-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1A1A2E;
+            margin-bottom: 5px;
+        }
+        .profile-email {
+            font-size: 15px;
+            color: #888;
+            margin-bottom: 30px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #eee;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .stat-card:hover {
+            border-color: #FF3D00;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255,61,0,0.15);
+        }
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #FF3D00;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: #888;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        .edit-section {
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+            border: 2px solid #eee;
+        }
+        .edit-section h3 {
+            color: #1A1A2E;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .edit-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            outline: none;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+        .edit-input:focus {
+            border-color: #FF3D00;
+            box-shadow: 0 0 10px rgba(255,61,0,0.2);
+        }
+        .save-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #FF3D00, #FFD600);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .save-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(255,61,0,0.4);
+        }
+        .logout-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        .logout-btn:hover {
+            background: #cc0000;
+            transform: scale(1.02);
+        }
+        .page-title {
+            text-align: center;
+            padding: 30px;
+            background: #1A1A2E;
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border-bottom: 4px solid #FF3D00;
+        }
+    </style>
+</head>
+<body ng-controller="ProfileController">
+
+<div class="page-title">👤 My Profile</div>
+
+<nav>
+    <ul style="display:flex; list-style:none; justify-content:center; gap:20px; background:#1A1A2E; padding:12px; margin:0; border-bottom:3px solid #FF3D00;">
+        <li><a href="mainpage.html" style="color:white; text-decoration:none; font-weight:600;">Home</a></li>
+        <li><a href="women.html" style="color:white; text-decoration:none; font-weight:600;">Women</a></li>
+        <li><a href="cart.html" style="color:white; text-decoration:none; font-weight:600;">🛒 Cart</a></li>
+        <li><a href="orderhistory.html" style="color:white; text-decoration:none; font-weight:600;">📦 Orders</a></li>
+        <li><a href="#" ng-click="logout()" style="color:#FF3D00; text-decoration:none; font-weight:700;">Logout 🚪</a></li>
+    </ul>
+</nav>
+
+<div class="profile-container">
+    <div class="profile-card">
+
+        <!-- Avatar -->
+        <div class="profile-avatar">👤</div>
+
+        <!-- Name & Email -->
+        <div class="profile-name">{{user.name}}</div>
+        <div class="profile-email">📧 {{user.email}}</div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card" onclick="window.location.href='orderhistory.html'">
+                <div class="stat-number">{{orderCount}}</div>
+                <div class="stat-label">📦 Total Orders</div>
+            </div>
+            <div class="stat-card" onclick="window.location.href='cart.html'">
+                <div class="stat-number">{{cartCount}}</div>
+                <div class="stat-label">🛒 Cart Items</div>
+            </div>
+        </div>
+
+        <!-- Edit Profile -->
+        <div class="edit-section">
+            <h3>✏️ Edit Profile</h3>
+            <input type="text" class="edit-input"
+                ng-model="editName"
+                placeholder="Enter new name">
+            <input type="email" class="edit-input"
+                ng-model="editEmail"
+                placeholder="Enter new email">
+            <button class="save-btn" ng-click="saveProfile()">
+                💾 Save Changes
+            </button>
+        </div>
+
+        <!-- Logout -->
+        <button class="logout-btn" ng-click="logout()">
+            🔴 Logout
+        </button>
+
+    </div>
+</div>
+
+<script>
+var app = angular.module('profileApp', []);
+
+app.controller('ProfileController', function($scope, $http) {
+
+    // ✅ User load karo localStorage se
+    const userData = JSON.parse(localStorage.getItem("user"));
+    if (!userData) {
+        showToast("Please login first!", "error");
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1000);
+    }
+
+    $scope.user = userData;
+    $scope.editName = userData ? userData.name : '';
+    $scope.editEmail = userData ? userData.email : '';
+    $scope.orderCount = 0;
+    $scope.cartCount = 0;
+
+    // ✅ Order count fetch karo
+    if (userData) {
+        $http.get('http://localhost:3000/orders/' + userData._id)
+        .then(function(response) {
+            $scope.orderCount = response.data.length;
+        });
+
+        // ✅ Cart count fetch karo
+        $http.get('http://localhost:3000/cart/' + userData._id)
+        .then(function(response) {
+            $scope.cartCount = response.data.reduce(function(sum, item) {
+                return sum + item.quantity;
+            }, 0);
+        });
+    }
+
+    // ✅ Save Profile
+    $scope.saveProfile = function() {
+        if (!$scope.editName || !$scope.editEmail) {
+            showToast("Please fill all fields!", "error");
+            return;
+        }
+
+        // localStorage mein update karo
+        const updatedUser = {
+            ...$scope.user,
+            name: $scope.editName,
+            email: $scope.editEmail
+        };
+
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        $scope.user = updatedUser;
+
+        showToast("Profile Updated! ✅", "success");
+    };
+
+    // ✅ Logout
+    $scope.logout = function() {
+        localStorage.removeItem("user");
+        showToast("Logged out! 👋", "warning");
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1000);
+    };
+});
+</script>
+
+</body>
+</html>
